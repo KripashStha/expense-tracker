@@ -14,12 +14,14 @@ A full-stack expense tracking application to help you understand your finances b
 ## Tech Stack
 
 **Backend:**
+
 - Django 6.0
 - Django REST Framework
 - SimpleJWT for authentication
-- PostgreSQL (production) / SQLite (development)
+- SQLite (local development only)
 
 **Frontend:**
+
 - React 18 with TypeScript
 - Axios for API calls
 - React Router for navigation
@@ -39,45 +41,51 @@ cd expense-tracker
 cd backend
 
 # Create virtual environment
-python -m venv venv
+python -m venv env
 
 # Activate virtual environment
 # Windows:
-venv\Scripts\activate
+env\Scripts\activate
 # macOS/Linux:
-source venv/bin/activate
+source env/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-```bash
 # Run migrations
+
 python manage.py migrate
 
 # Start the backend server
-python manage.py runserver
-```
 
-The backend will run at `http://localhost:8000`
+python manage.py runserver
+
+The backend will run at http://localhost:8000
 
 ### 3. Frontend Setup
 
-```bash
 cd frontend
 
 # Install dependencies
+
 npm install
 
 # Start the development server
-npm start
-```
 
-The frontend will run at `http://localhost:3000`
+npm start
+
+The frontend will run at http://localhost:3000
 
 ## Usage
 
-1. Open `http://localhost:3000` in your browser
+1. Open http://localhost:3000 in your browser
 2. Register a new account with your email
 3. Log in with your credentials
 4. Start tracking your expenses and income!
+
+# For production or deployment, configure environment variables and database as needed.
+
+---
+
+**Note:** This project is now set up for local development only. All deployment and production configuration has been removed. If you wish to deploy in the future, you will need to re-add production settings and deployment files.
