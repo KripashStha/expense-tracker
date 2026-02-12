@@ -50,15 +50,6 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Create .env file
-```
-
-Create a `.env` file in the `backend` folder with:
-
-```env
-DATABASE_URL=postgresql://neondb_owner:npg_Q7Ic9dBJrtxZ@ep-jolly-recipe-aiy3m35j-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
-```
-
 ```bash
 # Run migrations
 python manage.py migrate
