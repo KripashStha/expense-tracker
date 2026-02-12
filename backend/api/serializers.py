@@ -46,16 +46,20 @@ class IncomeSerializer(serializers.ModelSerializer):
         if not value:
             return None
         user = self.context['request'].user
-        try:
-            category = Category.objects.get(
-                name__iexact=value,
-                category_type='income'
-            )
-            if category.user is not None and category.user != user:
-                raise serializers.ValidationError("Category not found")
-            return category
-        except Category.DoesNotExist:
+        category = Category.objects.filter(
+            name__iexact=value,
+            category_type='income'
+        ).filter(
+            user__isnull=True
+        ) | Category.objects.filter(
+            name__iexact=value,
+            category_type='income',
+            user=user
+        )
+        category = category.first()
+        if not category:
             raise serializers.ValidationError(f"Category '{value}' not found for income")
+        return category
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
@@ -82,16 +86,20 @@ class ExpenseSerializer(serializers.ModelSerializer):
         if not value:
             return None
         user = self.context['request'].user
-        try:
-            category = Category.objects.get(
-                name__iexact=value,
-                category_type='expense'
-            )
-            if category.user is not None and category.user != user:
-                raise serializers.ValidationError("Category not found")
-            return category
-        except Category.DoesNotExist:
+        category = Category.objects.filter(
+            name__iexact=value,
+            category_type='expense'
+        ).filter(
+            user__isnull=True
+        ) | Category.objects.filter(
+            name__iexact=value,
+            category_type='expense',
+            user=user
+        )
+        category = category.first()
+        if not category:
             raise serializers.ValidationError(f"Category '{value}' not found for expense")
+        return category
 
     def create(self, validated_data):
         validated_data['user'] = self.context['request'].user
