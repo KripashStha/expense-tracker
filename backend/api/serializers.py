@@ -46,17 +46,18 @@ class IncomeSerializer(serializers.ModelSerializer):
         if not value:
             return None
         user = self.context['request'].user
+        # Prefer user category, then global
         category = Category.objects.filter(
-            name__iexact=value,
-            category_type='income'
-        ).filter(
-            user__isnull=True
-        ) | Category.objects.filter(
             name__iexact=value,
             category_type='income',
             user=user
-        )
-        category = category.first()
+        ).first()
+        if not category:
+            category = Category.objects.filter(
+                name__iexact=value,
+                category_type='income',
+                user__isnull=True
+            ).first()
         if not category:
             raise serializers.ValidationError(f"Category '{value}' not found for income")
         return category
@@ -86,17 +87,18 @@ class ExpenseSerializer(serializers.ModelSerializer):
         if not value:
             return None
         user = self.context['request'].user
+        # Prefer user category, then global
         category = Category.objects.filter(
-            name__iexact=value,
-            category_type='expense'
-        ).filter(
-            user__isnull=True
-        ) | Category.objects.filter(
             name__iexact=value,
             category_type='expense',
             user=user
-        )
-        category = category.first()
+        ).first()
+        if not category:
+            category = Category.objects.filter(
+                name__iexact=value,
+                category_type='expense',
+                user__isnull=True
+            ).first()
         if not category:
             raise serializers.ValidationError(f"Category '{value}' not found for expense")
         return category
