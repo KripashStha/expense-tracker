@@ -35,6 +35,7 @@ cd expense-tracker
 
 ### 2. Backend Setup
 
+```bash
 cd backend
 
 # Create virtual environment
@@ -48,6 +49,7 @@ source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
+```
 
 ```bash
 # Run migrations
