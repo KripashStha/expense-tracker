@@ -35,7 +35,6 @@ cd expense-tracker
 
 ### 2. Backend Setup
 
-```bash
 cd backend
 
 # Create virtual environment
