@@ -83,9 +83,3 @@ The frontend will run at http://localhost:3000
 2. Register a new account with your email
 3. Log in with your credentials
 4. Start tracking your expenses and income!
-
-# For production or deployment, configure environment variables and database as needed.
-
----
-
-**Note:** This project is now set up for local development only. All deployment and production configuration has been removed. If you wish to deploy in the future, you will need to re-add production settings and deployment files.
